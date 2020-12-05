@@ -6,6 +6,8 @@ from random import random, randint
 from time import sleep
 from threading import Thread, Lock
 from yaml import safe_load
+# sudo apt install xvfb
+# pip3 install -r requirements.txt
 
 
 with open('resources/config.yaml') as yaml_in:
@@ -85,7 +87,6 @@ class MultiBrowserTest(ArgParser):
 
 
 if __name__ == '__main__':
-
     sel_test = MultiBrowserTest(10)
     if not sel_test.get_args().headless:
         sel_test.open_browsers()
