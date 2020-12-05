@@ -5,7 +5,11 @@ from selenium.webdriver.common.keys import Keys
 from random import random, randint
 from time import sleep
 from threading import Thread, Lock
-from common.config import config
+from yaml import safe_load
+
+
+with open('resources/config.yaml') as yaml_in:
+    config = safe_load(yaml_in)
 
 
 class BrowserTest:
