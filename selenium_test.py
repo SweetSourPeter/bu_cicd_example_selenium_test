@@ -1,14 +1,12 @@
 #! /usr/bin/python3
 from argparse import ArgumentParser
 from pyvirtualdisplay import Display
+from random import random, randint
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from random import random, randint
 from time import sleep
 from threading import Thread, Lock
 from yaml import safe_load
-# sudo apt install xvfb
-# pip3 install -r requirements.txt
 
 
 with open('resources/config.yaml') as yaml_in:
@@ -66,7 +64,7 @@ class MultiBrowserTest(ArgParser):
         self.browsers = [None for _ in range(n)]
         self.lock = Lock()
 
-    def _open_browser_thread(self, index):
+    def _browser_thread(self, index):
         new_browser = BrowserTest()
         with self.lock:
             self.browsers[index] = new_browser
@@ -78,12 +76,12 @@ class MultiBrowserTest(ArgParser):
         try:
             threads = []
             for index in range(len(self.browsers)):
-                current_thread = Thread(target=self._open_browser_thread, args=[index])
+                current_thread = Thread(target=self._browser_thread, args=[index])
                 current_thread.start()
                 threads.append(current_thread)
             _ = [fin_thread.join() for fin_thread in threads]
         finally:
-            sleep(randint(5, 10) + random())
+            sleep(randint(60, 70) + random())
             _ = [obj.close_browser() for obj in self.browsers if obj is not None]
 
 
