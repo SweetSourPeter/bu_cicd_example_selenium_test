@@ -2,11 +2,11 @@ FROM ubuntu:18.04
 
 
 # Build the Dockerfile from within the project's directory:
-# docker build -t bu_cicd_example_selenium_test:app .
+# docker build -t ubuntu_selenium_test:latest .
 
 
 # Run the container:
-# docker run -d -it bu_cicd_example_selenium_test:app
+# docker run -it --entrypoint /bin/bash <container ID>
 
 
 RUN apt-get update && apt-get install -y build-essential \
@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y build-essential \
     python3-dev \
     python3-pip \
     vim \
-    xvfb
+    xvfb \
+    firefox
 
 
 RUN apt-get clean
@@ -53,7 +54,7 @@ RUN chmod +x /var/tmp/bu_cicd_example_selenium_test/selenium_test.py
 
 # Run the Selenium app with the headless option and output to file. Text appended
 # to the file during execution indicates errors; an empty file is a success.
-CMD  /var/tmp/bu_cicd_example_selenium_test/selenium_test.py -x > error.txt
+# CMD  /var/tmp/bu_cicd_example_selenium_test/selenium_test.py -x > error.txt
 
 
 # -----------------------------------------------------------------------------
