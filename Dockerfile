@@ -1,14 +1,6 @@
 FROM ubuntu:18.04
 
 
-# Build the Dockerfile from within the project's directory:
-# docker build -t ubuntu_selenium_test:latest .
-
-
-# Run the container:
-# docker run -it --entrypoint /bin/bash <container ID>
-
-
 RUN apt-get update && apt-get install -y build-essential \
     wget \
     python3 \
@@ -54,20 +46,30 @@ RUN chmod +x /var/tmp/bu_cicd_example_selenium_test/selenium_test.py
 
 # Run the Selenium app with the headless option and output to file. Text appended
 # to the file during execution indicates errors; an empty file is a success.
-# CMD  /var/tmp/bu_cicd_example_selenium_test/selenium_test.py -x > error.txt
+CMD  /var/tmp/bu_cicd_example_selenium_test/selenium_test.py -x > error.txt
 
 
 # -----------------------------------------------------------------------------
-# USEFUL DOCKER COMMANDS# View or remove current images:
+
+# Build the Dockerfile from within the project's directory:
+# docker build -t ubuntu_selenium_test:latest .
+
+
+# Run container for life of processes
+# (will terminate quickly if not running a process or sleeping):
+# docker run --detach -it ubuntu_selenium_test
+
+
+# Enter a running container
+# docker exec -it <container id> /bin/bash
+
+
+#  View or remove current images:
 # docker image ls | rm
 
 
 # View running containers:
 # docker container ls
-
-
-# Enter a running container
-# docker exec -it <container id> /bin/bash
 
 
 # Stop/Remove a running container:
