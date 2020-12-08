@@ -83,7 +83,7 @@ parameters:
   displayName: Git Repository URL
   name: SOURCE_REPOSITORY_URL
   required: true
-  value: git@github.com:SweetSourPeter/bu_cicd_example_selenium_test.git
+  value: https://github.com/SweetSourPeter/bu_cicd_example_selenium_test.git
   
 
 - description: Set this to a branch name, tag or other ref of your repository
